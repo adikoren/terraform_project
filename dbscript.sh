@@ -13,7 +13,7 @@ sudo systemctl start postgresql.service
 sudo -u postgres psql -c "CREATE DATABASE flask_db;"
 
 # Create a PostgreSQL user and grant privileges on the database
-sudo -u postgres psql -c "CREATE USER adi WITH PASSWORD 'adikoren';"
+sudo -u postgres psql -c "CREATE USER ${var.db_username} WITH PASSWORD '${var.db_password}';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE flask_db TO adi;"
 
 echo "listen_addresses = '*'" | sudo tee -a /etc/postgresql/*/main/postgresql.conf

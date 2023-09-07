@@ -12,16 +12,7 @@ variable "vnet_tr_westus" {
   default     = "vnet-tr-westus"
 }
 
-variable "admin_username" {
-  description = "The username for the local account that will be created on the new VM."
-  type        = string
-  default     = "adi"
-}
-variable "admin_password" {
-  description = "The password for the local account that will be created on the new VM."
-  type        = string
-  default     = "Adikoren1"
-}
+
 
 variable "name_prefix" {
   default     = "postgresqlfs"

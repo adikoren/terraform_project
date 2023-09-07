@@ -11,7 +11,7 @@ Flask Flask-SQLAlchemy psycopg2
 apt-get install -y python3-flask python3-itsdangerous python3-pyinotify python3-simplejson python3-werkzeug
 
 # Run the Flask app
-nohup python3 flask_app/app.py > /dev/null 2>&1&
+python3 flask_app/app.py > /dev/null 2>&1&
 
 
 

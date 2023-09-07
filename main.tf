@@ -51,7 +51,7 @@ resource "azurerm_network_security_group" "az_nsg_webapp" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = "46.121.205.98"
+    source_address_prefix      = "2.52.130.168"
     destination_address_prefix = "*"
 }
 }
@@ -141,7 +141,7 @@ resource "azurerm_public_ip" "az_pip_db" {
   name                = "pip-te-db-westus"
   location            = "westus"
   resource_group_name = var.rg_tr_westus
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
 }
 
 # Create public IPs
@@ -161,8 +161,10 @@ resource "azurerm_network_interface" "az_nic_db" {
   ip_configuration {
     name                          = "nic-ip-config-tr-db-westus"
     subnet_id                     = azurerm_subnet.az_snet_db_tr_westus.id
-    private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.az_pip_db.id
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.0.10"
+    primary                       = true
+
   }
 }
 
@@ -255,6 +257,10 @@ SETTINGS
     azurerm_linux_virtual_machine.az_vm_db
   ]
 
+}
+
+data "template_file" "base64_encoded_script" {
+  template = file("${path.module}/vm-webapp-flask-script.sh")
 }
 
 # Create an extension virtual machine for webapp
